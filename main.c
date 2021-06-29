@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 21:02:37 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/29 12:37:47 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/06/29 21:05:20 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int main()
 	t_clist	*tmp;
 	t_philo	*philo;
 	t_table	table;
+	struct timeval tv;
 
 	table.count = 0;
 	table.philos = NULL;
@@ -32,7 +33,8 @@ int main()
 	tmp = table.philos;
 	while (tmp->next)
 	{
-		printf("Philo : %d index : %d\n",tmp->content.id, tmp->index);
+		gettimeofday(&tv, NULL);
+		printf("added at :%d | Philo : %d index : %d\n", tmp->content.time_added, tmp->content.id, tmp->index);
 		tmp = tmp->next;
 		if (tmp == table.philos)
 			break ;

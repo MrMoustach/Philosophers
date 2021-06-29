@@ -6,22 +6,25 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 11:13:49 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/29 11:14:59 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/06/29 21:03:58 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TYPES_H
 # define TYPES_H
+# include <sys/time.h>
+
 typedef struct s_philo
 {
-		int		id;
-		int		n_slept;
-		int		n_ate;
-		int		n_thought;
-		int		last_slept;
-		int		last_ate;
-		int		last_thought;
-		int		status;
+		int			id;
+		suseconds_t	time_added;
+		int			n_slept;
+		int			n_ate;
+		int			n_thought;
+		int			last_slept;
+		int			last_ate;
+		int			last_thought;
+		int			status;
 }               t_philo;
 
 typedef struct s_clist 

@@ -6,17 +6,18 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 10:55:03 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/29 12:39:01 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/06/29 21:03:38 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/philo.h"
 
-t_philo ft_new_philo(int id)
+t_philo ft_new_philo(int id, suseconds_t added)
 {
 	t_philo ret;
 
 	ret.id = id;
+	ret.time_added = added;
 	ret.n_slept = 0;
 	ret.n_ate = 0;
 	ret.n_thought = 0;
@@ -29,6 +30,9 @@ t_philo ft_new_philo(int id)
 
 t_table	add_philo(t_table table)
 {
-	ft_add_clist(&table.philos, ft_new_clist(ft_new_philo(table.count++ + 1)));
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	ft_add_clist(&table.philos, ft_new_clist(ft_new_philo(table.count++ + 1, tv.tv_usec)));
 	return (table);	
 }
