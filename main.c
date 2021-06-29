@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 21:02:37 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/28 14:53:06 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/06/29 11:15:55 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,22 @@
 
 int main()
 {
-	t_clist *test;
 	t_clist	*tmp;
-	char *s;
+	t_philo	*philo;
+	t_table	table;
 
-	s = strdup("hello");
-	test = NULL;
-	ft_add_clist(&test, ft_new_clist(s));
-	s = strdup("POG");
-	ft_add_clist(&test, ft_new_clist(s));
-	s = strdup("CHAMP");
-	ft_add_clist(&test, ft_new_clist(s));
-	tmp = test;
-	while (tmp->next) 
+	table.count = 0;
+	table.philos = NULL;
+	table = add_philo(table);
+	table = add_philo(table);
+	table = add_philo(table);
+	table = add_philo(table);
+	tmp = table.philos;
+	while (tmp->next)
 	{
-		printf("content : %s index : %d\n",(char *)tmp->content, tmp->index);
+		printf("Philo : %d index : %d\n",tmp->content.id, tmp->index);
 		tmp = tmp->next;
-		if (tmp == test)
+		if (tmp == table.philos)
 			break ;
 	}
 	

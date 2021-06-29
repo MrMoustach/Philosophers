@@ -6,22 +6,15 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 09:56:42 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/28 12:42:04 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/06/29 11:15:17 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLIST_H
 # define CLIST_H
 # include <stdlib.h>
+# include "types.h"
 
-typedef struct s_clist 
-{
-	void			*content;
-	struct s_clist	*next;
-	int				index;
-}			   t_clist;
-
-t_clist	*ft_new_clist(void *content);
-void	ft_destroy_clist(t_clist *node, void (*fun)(void *content));
+t_clist	*ft_new_clist(t_philo content);
 int		ft_add_clist(t_clist **list, t_clist *node);
 #endif
