@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 21:02:37 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/29 11:15:55 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/06/29 12:37:47 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int main()
 
 	table.count = 0;
 	table.philos = NULL;
+	table = add_philo(table);
+	table = add_philo(table);
+	table = add_philo(table);
 	table = add_philo(table);
 	table = add_philo(table);
 	table = add_philo(table);
