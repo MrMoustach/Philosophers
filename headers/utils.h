@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/27 17:01:39 by zed               #+#    #+#             */
-/*   Updated: 2021/06/30 18:33:06 by iharchi          ###   ########.fr       */
+/*   Created: 2021/06/30 17:48:07 by iharchi           #+#    #+#             */
+/*   Updated: 2021/06/30 17:53:57 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
-# include <pthread.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
-# include <sys/time.h>
-# include "clist.h"
-# include "types.h"
-# include "utils.h"
+#ifndef UTILS_H
+# define UTILS_H
+# include "philo.h"
 
-t_table	add_philo(t_table table);
-t_philo ft_new_philo(int id, suseconds_t added);
-void *routine(void *content);
+int			ft_atoi(const char *str);
+int			ft_is_number(char *s);
 #endif

@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 10:55:03 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/29 21:03:38 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/06/30 18:28:38 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_philo ft_new_philo(int id, suseconds_t added)
 	ret.last_ate = 0;
 	ret.last_thought = 0;
 	ret.status = 0;
+	pthread_mutex_init(&ret.the_fork, NULL);
+	pthread_create(&(ret.tid), NULL, &routine, NULL);
 	return (ret);
 }
 

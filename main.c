@@ -6,33 +6,47 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 21:02:37 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/29 21:05:20 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/06/30 18:34:09 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/philo.h"
 #include <string.h>
 
+t_table	table;
 
-int main()
+void *routine(void *content)
+{
+	t_philo philo;
+	philo = *((t_philo *)content);
+	// pthread_mutex_lock(&philo.the_fork);
+	printf("Philo %d is using his fork", philo.id);
+	// pthread_mutex_unlock(&philo.the_fork);
+	return (NULL);
+}
+int main(int ac, char **av)
 {
 	t_clist	*tmp;
 	t_philo	*philo;
-	t_table	table;
 	struct timeval tv;
-
+	int	i;
 	table.count = 0;
 	table.philos = NULL;
-	table = add_philo(table);
-	table = add_philo(table);
-	table = add_philo(table);
-	table = add_philo(table);
-	table = add_philo(table);
-	table = add_philo(table);
-	table = add_philo(table);
+	if (!ft_is_number(av[1]))
+	{
+		printf("Error\n");
+		return (1);
+	}
+	i = 0;
+	while (i++ < ft_atoi(av[1]))
+	{
+		table = add_philo(table);
+	}
 	tmp = table.philos;
 	while (tmp->next)
 	{
+		pthread_join(tmp->content.tid, NULL);
+		pthread_mutex_destroy(&tmp->content.the_fork);
 		gettimeofday(&tv, NULL);
 		printf("added at :%d | Philo : %d index : %d\n", tmp->content.time_added, tmp->content.id, tmp->index);
 		tmp = tmp->next;
