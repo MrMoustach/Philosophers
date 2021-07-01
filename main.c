@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 21:02:37 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/30 18:34:09 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/01 18:27:48 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void *routine(void *content)
 {
 	t_philo philo;
 	philo = *((t_philo *)content);
-	// pthread_mutex_lock(&philo.the_fork);
-	printf("Philo %d is using his fork", philo.id);
-	// pthread_mutex_unlock(&philo.the_fork);
+	pthread_mutex_lock(&philo.the_fork);
+	printf("Philo %d is using his fork\n", philo.id);
+	pthread_mutex_unlock(&philo.the_fork);
 	return (NULL);
 }
 int main(int ac, char **av)
@@ -45,7 +45,7 @@ int main(int ac, char **av)
 	tmp = table.philos;
 	while (tmp->next)
 	{
-		pthread_join(tmp->content.tid, NULL);
+		// pthread_join(tmp->content.tid, NULL);
 		pthread_mutex_destroy(&tmp->content.the_fork);
 		gettimeofday(&tv, NULL);
 		printf("added at :%d | Philo : %d index : %d\n", tmp->content.time_added, tmp->content.id, tmp->index);
