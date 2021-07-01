@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 21:02:37 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/01 18:27:48 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/01 18:42:59 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 #include <string.h>
 
 t_table	table;
+pthread_mutex_t lock;
 
 void *routine(void *content)
 {
 	t_philo philo;
+	
+	pthread_mutex_lock(&lock);
 	philo = *((t_philo *)content);
-	pthread_mutex_lock(&philo.the_fork);
 	printf("Philo %d is using his fork\n", philo.id);
-	pthread_mutex_unlock(&philo.the_fork);
+	sleep(1);
+	pthread_mutex_unlock(&lock);
 	return (NULL);
 }
 int main(int ac, char **av)
@@ -38,6 +41,7 @@ int main(int ac, char **av)
 		return (1);
 	}
 	i = 0;
+	pthread_mutex_init(&lock, NULL);
 	while (i++ < ft_atoi(av[1]))
 	{
 		table = add_philo(table);
@@ -45,7 +49,7 @@ int main(int ac, char **av)
 	tmp = table.philos;
 	while (tmp->next)
 	{
-		// pthread_join(tmp->content.tid, NULL);
+		pthread_join(tmp->content.tid, NULL);
 		pthread_mutex_destroy(&tmp->content.the_fork);
 		gettimeofday(&tv, NULL);
 		printf("added at :%d | Philo : %d index : %d\n", tmp->content.time_added, tmp->content.id, tmp->index);
