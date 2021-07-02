@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:01:39 by zed               #+#    #+#             */
-/*   Updated: 2021/06/30 18:33:06 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/02 16:23:03 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,6 @@
 t_table	add_philo(t_table table);
 t_philo ft_new_philo(int id, suseconds_t added);
 void *routine(void *content);
+
+pthread_mutex_t lock;
 #endif

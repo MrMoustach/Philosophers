@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 10:55:03 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/01 18:27:09 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/02 16:31:22 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ t_table	add_philo(t_table table)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	ft_add_clist(&table.philos, ft_new_clist(ft_new_philo(table.count++ + 1, tv.tv_usec)));
-	return (table);	
+	ft_add_clist(&table.philos, ft_new_clist(ft_new_philo(++table.count, tv.tv_usec)));
+	return (table);
 }

@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 21:02:37 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/01 18:42:59 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/02 16:28:19 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 #include <string.h>
 
 t_table	table;
-pthread_mutex_t lock;
 
 void *routine(void *content)
 {
 	t_philo philo;
 	
-	pthread_mutex_lock(&lock);
 	philo = *((t_philo *)content);
+	pthread_mutex_lock(&lock);
 	printf("Philo %d is using his fork\n", philo.id);
 	sleep(1);
 	pthread_mutex_unlock(&lock);
@@ -45,6 +44,7 @@ int main(int ac, char **av)
 	while (i++ < ft_atoi(av[1]))
 	{
 		table = add_philo(table);
+		sleep(1);
 	}
 	tmp = table.philos;
 	while (tmp->next)
@@ -57,7 +57,7 @@ int main(int ac, char **av)
 		if (tmp == table.philos)
 			break ;
 	}
-	
+	pthread_mutex_destroy(&lock);
 }
 
 // pthread_t tid[2];
