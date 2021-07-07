@@ -6,13 +6,13 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:49:18 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/29 11:11:06 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/07 09:20:46 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/clist.h"
 
-t_clist	*ft_new_clist(t_philo content)
+t_clist	*ft_new_clist(t_philo *content)
 {
 	t_clist *ret;
 	

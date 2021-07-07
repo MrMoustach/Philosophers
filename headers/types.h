@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 11:13:49 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/30 18:27:28 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/07 10:11:40 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,21 @@ typedef struct s_philo
 
 typedef struct s_clist 
 {
-	t_philo			content;
+	t_philo			*content;
 	struct s_clist	*next;
 	int				index;
 }			   t_clist;
 
 typedef struct s_table
 {
-		t_clist	*philos;
-		int		count;
-		int		iteration;
-		int		time_passed;
-		int		time_to_die;
-		int		time_to_eat;
-		int		time_to_sleep;
-		int		max_n_eat;
+		t_clist			*philos;
+		int				count;
+		int				iteration;
+		int				time_passed;
+		int				time_to_die;
+		int				time_to_eat;
+		int				time_to_sleep;
+		int				max_n_eat;
+		pthread_mutex_t	*forks;
 }				t_table;
 #endif

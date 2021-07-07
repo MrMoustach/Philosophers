@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 09:56:42 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/29 11:15:17 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/07 09:20:15 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 # include <stdlib.h>
 # include "types.h"
 
-t_clist	*ft_new_clist(t_philo content);
+t_clist	*ft_new_clist(t_philo *content);
 int		ft_add_clist(t_clist **list, t_clist *node);
 #endif
