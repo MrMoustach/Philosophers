@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 21:02:37 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/09 07:41:36 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/09 07:42:30 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ t_table	init_table(int ac, char *av[])
 
 	table.error = 0;
 	table.philos = NULL;
+	printf("%d\n", ac);
 	if (!(ac == 6 || ac == 5))
 	{
 		table.error = -1;
