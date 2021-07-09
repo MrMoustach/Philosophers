@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 17:50:12 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/30 17:55:05 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/09 07:35:04 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,14 @@ int	ft_is_number(char *s)
 		i++;
 	}
 	return (1);
+}
+
+int	ft_strlen(char *s)
+{
+	int ret;
+
+	ret = 0;
+	while (s[ret++])
+	;
+	return (ret);
 }

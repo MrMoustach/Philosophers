@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:01:39 by zed               #+#    #+#             */
-/*   Updated: 2021/07/07 09:19:53 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/09 07:38:45 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "types.h"
 # include "utils.h"
 
-t_table	add_philo(t_table table);
+t_table	add_philo(t_table table, int id);
 t_philo *ft_new_philo(int id, suseconds_t added);
 void *routine(void *content);
 

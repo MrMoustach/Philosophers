@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 11:13:49 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/07 10:11:40 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/09 07:33:09 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ typedef struct s_table
 		int				time_to_sleep;
 		int				max_n_eat;
 		pthread_mutex_t	*forks;
+		int				error;
 }				t_table;
 #endif

@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 21:02:37 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/07 20:29:16 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/09 07:41:36 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,48 @@ void *routine(void *content)
 	}
 	return (NULL);
 }
+
+int try_parse_int(char *str, int *err)
+{
+	long long	ret;
+	
+	if (!ft_is_number(str) || ft_strlen(str) > 13)
+	{
+		(*err)--;
+		return (0);
+	}
+	ret = ft_atol(str);
+	if (ret > MAXINT || ret < MININT)
+	{
+		(*err)--;
+		return (0);
+	}
+	return ((int) ret);
+}
+
+t_table	init_table(int ac, char *av[])
+{
+	t_table	table;
+	int	i;
+
+	table.error = 0;
+	table.philos = NULL;
+	if (!(ac == 6 || ac == 5))
+	{
+		table.error = -1;
+		return (table);
+	}
+	table.count = try_parse_int(av[1], &table.error);
+	table.time_to_die = try_parse_int(av[2], &table.error);
+	table.time_to_eat = try_parse_int(av[3], &table.error);
+	table.time_to_sleep = try_parse_int(av[4], &table.error);
+	if (ac == 6)
+		table.max_n_eat = try_parse_int(av[5], &table.error);
+	if (table.error == 0)
+		table.forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * table.count);
+	return (table);
+}
+
 int main(int ac, char **av)
 {
 	t_clist	*tmp;
@@ -48,20 +90,16 @@ int main(int ac, char **av)
 	int	i;
 	int	count;
 	
-	g_table.count = 0;
-	g_table.philos = NULL;
-	if (!ft_is_number(av[1]))
+	g_table = init_table(ac, av);
+	if (g_table.error != 0)
 	{
-		printf("Error\n");
+		write (2, "Error\n", 7);
 		return (1);
 	}
 	i = 0;
-	// pthread_mutex_init(&lock, NULL);
-	count = ft_atoi(av[1]);
-	g_table.forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * count);
-	while (i < count)
+	while (i < g_table.count)
 	{
-		g_table = add_philo(g_table);
+		g_table = add_philo(g_table, i);
 		pthread_mutex_init(&g_table.forks[i++], NULL);
 		// sleep(1);
 	}

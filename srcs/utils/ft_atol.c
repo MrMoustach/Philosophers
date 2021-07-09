@@ -6,22 +6,22 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 21:37:29 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/30 17:49:43 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/09 07:19:33 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 static int	ft_isws(char c)
 {
-	if (c == '\n' || c == '\f' || c == ' ' ||
-			c == '\r' || c == '\v' || c == '\t')
+	if (c == '\n' || c == '\f' || c == ' '
+		|| c == '\r' || c == '\v' || c == '\t')
 		return (1);
 	return (0);
 }
 
-int			ft_atoi(const char *str)
+long long	ft_atol(const char *str)
 {
 	int				i;
-	int				n;
+	long long		n;
 	int				signe;
 
 	n = 0;
@@ -35,12 +35,6 @@ int			ft_atoi(const char *str)
 			signe = -1;
 	}
 	while (str[i] >= '0' && (str[i] <= '9') && str[i] != '\0')
-	{
-		if (((unsigned long)n > 9223372036854775807 / 10) ||
-				(((unsigned long)n == 9223372036854775807 / 10) &&
-				((unsigned long)n % 10) > 7))
-			return ((signe > 0 ? -1 : 0));
 		n = (n * 10) + (str[i++] - '0');
-	}
 	return (n * signe);
 }

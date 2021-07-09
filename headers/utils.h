@@ -6,14 +6,16 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 17:48:07 by iharchi           #+#    #+#             */
-/*   Updated: 2021/06/30 17:53:57 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/09 07:34:13 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 # include "philo.h"
-
-int			ft_atoi(const char *str);
+# define MAXINT 2147483647
+# define MININT -2147483648
+int			ft_atol(const char *str);
 int			ft_is_number(char *s);
+int			ft_strlen(char *s);
 #endif
