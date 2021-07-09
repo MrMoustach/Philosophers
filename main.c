@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 21:02:37 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/07 11:15:09 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/07 20:29:16 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,20 @@ void *routine(void *content)
 {
 	t_philo *philo;
 	int		index;
+	struct timeval tv;
+
 	
 	philo = ((t_philo *)content);
 	while (1)
 	{
-		printf("philo %d here\n", philo->id);
+		// printf("philo %d here\n", philo->id);
 		index = ((philo->id - 2) + g_table.count) % g_table.count;
 		sleep(1);
 		pthread_mutex_lock(&g_table.forks[philo->id - 1]);
 		pthread_mutex_lock(&g_table.forks[index]);
-		printf("philo %d locked fork %d\n", philo->id,index);
-		printf("\033[31;1mPhilo %d is using his fork\033[0m\n", philo->id);
+		// printf("philo %d locked fork %d\n", philo->id,index);
+		gettimeofday(&tv, NULL);
+		printf("\033[31;1mat : %d Philo %d is eating\033[0m\n", tv.tv_usec, philo->id);
 		sleep(1);
 		pthread_mutex_unlock(&g_table.forks[philo->id - 1]);
 		pthread_mutex_unlock(&g_table.forks[index]);
@@ -60,7 +63,7 @@ int main(int ac, char **av)
 	{
 		g_table = add_philo(g_table);
 		pthread_mutex_init(&g_table.forks[i++], NULL);
-		sleep(1);
+		// sleep(1);
 	}
 	tmp = g_table.philos;
 	while (tmp->next)
