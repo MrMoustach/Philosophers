@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+         #
+#    By: zed <zed@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/29 10:24:43 by iharchi           #+#    #+#              #
-#    Updated: 2021/06/30 17:49:29 by iharchi          ###   ########.fr        #
+#    Updated: 2021/07/10 14:52:07 by zed              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ FLAG		= -Wall -Werror -Wextra
 # all: $(NAME)
 # $(NAME) : 
 all:
-			@gcc main.c -g $(SRCS) -o $(NAME)
+			@gcc main.c -g $(SRCS) -o $(NAME) -lpthread
 clean:
 			@/bin/rm -f $(OBJECT)
 

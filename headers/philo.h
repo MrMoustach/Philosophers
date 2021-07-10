@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zed <zed@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:01:39 by zed               #+#    #+#             */
-/*   Updated: 2021/07/09 07:38:45 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/10 14:51:09 by zed              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,4 @@ t_table	add_philo(t_table table, int id);
 t_philo *ft_new_philo(int id, suseconds_t added);
 void *routine(void *content);
 
-pthread_mutex_t lock;
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zed <zed@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 21:02:37 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/09 07:42:30 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/07/10 14:51:00 by zed              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void *routine(void *content)
 		pthread_mutex_lock(&g_table.forks[index]);
 		// printf("philo %d locked fork %d\n", philo->id,index);
 		gettimeofday(&tv, NULL);
-		printf("\033[31;1mat : %d Philo %d is eating\033[0m\n", tv.tv_usec, philo->id);
+		printf("\033[31;1mat : %lld Philo %d is eating\033[0m\n", (long long)tv.tv_usec, philo->id);
 		sleep(1);
 		pthread_mutex_unlock(&g_table.forks[philo->id - 1]);
 		pthread_mutex_unlock(&g_table.forks[index]);
@@ -118,12 +118,12 @@ int main(int ac, char **av)
 		pthread_join(tmp->content->tid, NULL);
 		pthread_mutex_destroy(&tmp->content->the_fork);
 		gettimeofday(&tv, NULL);
-		printf("added at :%d | Philo : %d index : %d\n", tmp->content->time_added, tmp->content->id, tmp->index);
+		printf("added at :%lld | Philo : %d index : %d\n", (long long)tmp->content->time_added, tmp->content->id, tmp->index);
 		tmp = tmp->next;
 		if (tmp == g_table.philos)
 			break ;
 	}
-	pthread_mutex_destroy(&lock);
+	// pthread_mutex_destroy(&lock);
 }
 
 // pthread_t tid[2];
