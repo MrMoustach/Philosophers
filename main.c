@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zed <zed@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 21:02:37 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/10 14:51:00 by zed              ###   ########.fr       */
+/*   Updated: 2021/07/12 14:57:01 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,26 @@ void *routine(void *content)
 	philo = ((t_philo *)content);
 	while (1)
 	{
-		// printf("philo %d here\n", philo->id);
 		index = ((philo->id - 2) + g_table.count) % g_table.count;
-		sleep(1);
+		if (philo->n_ate)
+		{
+			gettimeofday(&tv, NULL);
+			printf("\033[32;1mat : %lld Philo %d is sleeping\033[0m\n", (long long)tv.tv_usec, philo->id);
+			philo->n_slept++;
+			usleep(g_table.time_to_sleep);
+			gettimeofday(&tv, NULL);
+			printf("\033[35;1mat : %lld Philo %d is thinking\033[0m\n", (long long)tv.tv_usec, philo->id);
+			philo->n_thought++;
+			usleep(g_table.time_to_die - g_table.time_to_sleep);
+		}
 		pthread_mutex_lock(&g_table.forks[philo->id - 1]);
 		pthread_mutex_lock(&g_table.forks[index]);
-		// printf("philo %d locked fork %d\n", philo->id,index);
 		gettimeofday(&tv, NULL);
 		printf("\033[31;1mat : %lld Philo %d is eating\033[0m\n", (long long)tv.tv_usec, philo->id);
-		sleep(1);
+		philo->n_ate++;
+		usleep(g_table.time_to_eat);
 		pthread_mutex_unlock(&g_table.forks[philo->id - 1]);
 		pthread_mutex_unlock(&g_table.forks[index]);
-		sleep(1);
 	}
 	return (NULL);
 }
@@ -66,7 +74,6 @@ t_table	init_table(int ac, char *av[])
 
 	table.error = 0;
 	table.philos = NULL;
-	printf("%d\n", ac);
 	if (!(ac == 6 || ac == 5))
 	{
 		table.error = -1;
