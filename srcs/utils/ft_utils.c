@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 17:50:12 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/09 07:35:04 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/04 15:05:44 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,22 @@ int	ft_strlen(char *s)
 	while (s[ret++])
 	;
 	return (ret);
+}
+
+int try_parse_int(char *str, int *err)
+{
+	long long	ret;
+	
+	if (!ft_is_number(str) || ft_strlen(str) > 13)
+	{
+		(*err)--;
+		return (0);
+	}
+	ret = ft_atol(str);
+	if (ret > MAXINT || ret < MININT)
+	{
+		(*err)--;
+		return (0);
+	}
+	return ((int) ret);
 }

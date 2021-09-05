@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 11:13:49 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/09 07:33:09 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/04 18:33:08 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define TYPES_H
 # include <sys/time.h>
 # include <pthread.h>
+
+enum status {SLEEPING, THINKING, EATING};
 
 typedef struct s_philo
 {
@@ -25,7 +27,7 @@ typedef struct s_philo
 		int				last_slept;
 		int				last_ate;
 		int				last_thought;
-		int				status;
+		enum status		status;
 		pthread_t		tid;
 		pthread_mutex_t the_fork;
 }               t_philo;
@@ -48,6 +50,7 @@ typedef struct s_table
 		int				time_to_sleep;
 		int				max_n_eat;
 		pthread_mutex_t	*forks;
+		pthread_mutex_t print;
 		int				error;
 }				t_table;
 #endif

@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 10:55:03 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/12 14:29:13 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/04 18:47:26 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ t_table	add_philo(t_table table, int id)
 	gettimeofday(&tv, NULL);
 	philo = ft_new_philo(id + 1, tv.tv_usec);
 	ft_add_clist(&table.philos, ft_new_clist(philo));
+	pthread_mutex_init(&table.forks[id], NULL);
 	printf("philo %d added\n", philo->id);
+	
+	pthread_create(&(philo->tid), NULL, &routine, (void *)(philo));
 	return (table);
 }
