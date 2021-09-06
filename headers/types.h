@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 11:13:49 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/06 12:43:51 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/06 14:54:25 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <sys/time.h>
 # include <pthread.h>
 
-enum status {SLEEPING, THINKING, EATING, FORK_1, FORK_2};
+enum status {SLEEPING, THINKING, EATING, FORK_1, FORK_2, DEAD};
 
 typedef struct s_philo
 {

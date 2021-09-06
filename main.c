@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 16:20:59 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/06 13:02:08 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/06 15:00:29 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	*routine(void *contents)
 	fork_index = philo->id % g_table.count ;
 	while (1)
 	{
+		if (philo->status == DEAD)
+			continue;
 		if (philo->n_ate)
 		{
 			gettimeofday(&tv, NULL);
@@ -119,7 +121,9 @@ t_table	init_table(int ac, char *av[])
 
 int	main(int ac, char **av)
 {
-	int	i;
+	int		i;
+	t_clist	*tmp;
+	struct timeval	tv;
 
 	g_table = init_table(ac, av);
 	if (g_table.error)
@@ -132,6 +136,16 @@ int	main(int ac, char **av)
 		g_table = add_philo(g_table, i++);
 	while (1)
 	{
+		tmp = g_table.philos;
+		while (tmp->next)
+		{
+			gettimeofday(&tv, NULL);
+			if (tv.tv_usec - tmp->content->last_ate > g_table.time_to_die && tmp->content->n_ate)
+				tmp->content->status = DEAD;
+			tmp = tmp->next;
+			if (tmp == g_table.philos)
+				break ;
+		}
 		print_status();
 		sleep(1);
 	}
