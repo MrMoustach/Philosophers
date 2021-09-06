@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 16:20:59 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/05 15:58:20 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/06 13:02:08 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@ t_table	g_table;
 void	express(t_philo	philo, struct timeval tv)
 {
 	pthread_mutex_lock(&g_table.print);
-	usleep(10);
 	if (philo.status == SLEEPING)
 		printf("\033[32;1mat : %lld Philo %d is sleeping\033[0m\n", (long long)tv.tv_usec, philo.id);
 	if (philo.status == THINKING)
 		printf("\033[35;1mat : %lld Philo %d is thinking\033[0m\n", (long long)tv.tv_usec, philo.id);
 	if (philo.status == EATING)
 		printf("\033[31;1mat : %lld Philo %d is eating\033[0m\n", (long long)tv.tv_usec, philo.id);
+	if (philo.status == FORK_1)
+		printf("\033[31;1mat : %lld Philo %d took his fork\033[0m\n", (long long)tv.tv_usec, philo.id);
+	if (philo.status == FORK_2)
+		printf("\033[31;1mat : %lld Philo %d took the second fork\033[0m\n", (long long)tv.tv_usec, philo.id);
 	pthread_mutex_unlock(&g_table.print);
 }
 
@@ -70,8 +73,13 @@ void	*routine(void *contents)
 			express(*philo,tv);
 		}
 		pthread_mutex_lock(&g_table.forks[philo->id - 1]);
+		philo->status = FORK_1;
+		gettimeofday(&tv, NULL);
+		express(*philo, tv);
 		pthread_mutex_lock(&g_table.forks[fork_index]);
 		gettimeofday(&tv, NULL);
+		philo->status = FORK_2;
+		express(*philo, tv);
 		philo->status = EATING;
 		express(*philo, tv);
 		sleep(g_table.time_to_eat);
