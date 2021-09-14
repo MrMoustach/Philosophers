@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 16:20:59 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/14 18:02:07 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/14 18:25:17 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,54 +51,17 @@ void	print_status()
 
 }
 
-// void	*routine(void *contents)
-// {
-// 	t_philo			*philo;
-// 	int				fork_index;
-// 	struct timeval	tv;
-// 	struct timeval	ntv;
+void	destroy_table(int id, enum e_end status)
+{
 	
-// 	philo = (t_philo *)contents;
-// 	fork_index = philo->id % g_table.count ;
-// 	while (1)
-// 	{
-// 		if (philo->status == DEAD)
-// 			continue;
-// 		if (philo->n_ate || philo->id % 2)
-// 		{
-// 			gettimeofday(&tv, NULL);
-// 			philo->status = SLEEPING;
-// 			express(*philo,tv);
-// 			gettimeofday(&ntv, NULL);
-// 			philo_sleep(g_table.time_to_sleep);
-// 			philo->n_slept++;
-// 			philo->last_slept = tv.tv_usec + g_table.time_to_sleep;
-// 			gettimeofday(&tv, NULL);
-// 			philo->status = THINKING;
-// 			express(*philo, tv);
-// 			gettimeofday(&ntv, NULL);
-// 			philo_sleep(g_table.time_to_eat - g_table.time_to_sleep - (ntv.tv_usec - tv.tv_usec));
-// 			philo->n_thought++;
-// 			philo->last_thought = tv.tv_usec + (g_table.time_to_eat - g_table.time_to_sleep);
-// 		}
-// 		pthread_mutex_lock(&g_table.forks[philo->id - 1]);
-// 		philo->status = FORK_1;
-// 		gettimeofday(&tv, NULL);
-// 		express(*philo, tv);
-// 		pthread_mutex_lock(&g_table.forks[fork_index]);
-// 		gettimeofday(&tv, NULL);
-// 		philo->status = FORK_2;
-// 		express(*philo, tv);
-// 		philo->status = EATING;
-// 		express(*philo, tv);
-// 		philo_sleep(g_table.time_to_eat);
-// 		philo->n_ate++;
-// 		philo->last_ate = tv.tv_usec + g_table.time_to_eat;
-// 		pthread_mutex_unlock(&g_table.forks[philo->id - 1]);
-// 		pthread_mutex_unlock(&g_table.forks[fork_index]);
-// 	}
-// 	return (contents);
-// }
+	pthread_mutex_lock(&g_table.print);
+	if (status == E_DEAD)
+		printf("at : %zu philo %d died\n", get_time(), id);
+	else
+		printf("at : %zu all philos ate atleast %d times\n", get_time(), g_table.max_n_eat);
+	exit ((int)status);
+}
+
 
 void *routine(void *content)
 {
@@ -177,19 +140,14 @@ int	main(int ac, char **av)
 			if ((get_time() - tmp->content->last_ate >= g_table.time_to_die) && tmp->content->status != EATING)
 			{	
 				tmp->content->status = DEAD;
-				printf("philo %d died\n", tmp->content->id);
-				exit (1);
+				destroy_table(tmp->content->id, E_DEAD);
 			}
 			tmp = tmp->next;
 			if (tmp == g_table.philos)
 				break ;
 		}
-		if (i == g_table.count)
-		{
-			printf("Completed at %zu\n", get_time());	
-			print_status();
-			exit (1);
-		}
+		if (i == g_table.count && g_table.max_n_eat > 0)
+			destroy_table(0, COMPLETED);
 
 	}
 }
