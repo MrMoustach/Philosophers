@@ -6,17 +6,17 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 16:00:36 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/14 17:45:05 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/14 19:02:18 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/philo.h"
 
 /** 
- * @brief  function that get time of day in microeconds
+ * @brief  function that get time of day in miliseconds
  * @note   
  * @param  Void: 
- * @returns size_t time of day in microseconds
+ * @returns size_t time of day in miliseconds
  */
 size_t	get_time(void)
 {
@@ -29,7 +29,7 @@ size_t	get_time(void)
 /** 
  * @brief  wrapper function for usleep and corrects a 60ms innacuraccy.
  * @note   
- * @param  size_t time to sleep in microseconds: 
+ * @param  size_t time to sleep in miliseconds: 
  * @retval None
  */
 void	n_sleep(size_t time)

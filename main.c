@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 16:20:59 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/14 18:25:17 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/14 19:06:39 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,49 +17,24 @@ void	express(t_philo	philo, size_t time)
 {
 	pthread_mutex_lock(&g_table.print);
 	if (philo.status == FORK_1)
-		printf("\033[31;1mat : %zu Philo %d took his fork\033[0m\n", time, philo.id);
+		printf("%zu %d has taken his fork\n", time, philo.id);
 	if (philo.status == FORK_2)
-		printf("\033[31;1mat : %zu Philo %d took the second fork\033[0m\n", time, philo.id);
+		printf("%zu %d has taken second fork\n", time, philo.id);
 	if (philo.status == SLEEPING)
-		printf("\033[32;1mat : %zu Philo %d is sleeping\033[0m\n", time, philo.id);
+		printf("%zu %d is sleeping\n", time, philo.id);
 	if (philo.status == THINKING)
-		printf("\033[35;1mat : %zu Philo %d is thinking\033[0m\n", time, philo.id);
+		printf("%zu %d is thinking\n", time, philo.id);
 	if (philo.status == EATING)
-		printf("\033[31;1mat : %zu Philo %d is eating\033[0m\n", time, philo.id);
+		printf("%zu %d is eating\n", time, philo.id);
 	pthread_mutex_unlock(&g_table.print);
-}
-
-void	print_status()
-{
-	t_clist	*tmp;
-
-	pthread_mutex_lock(&g_table.print);
-	printf("time to sleep : %d\n", g_table.time_to_sleep);
-	printf("time to eat : %d\n", g_table.time_to_eat);
-	printf("time to die : %d\n", g_table.time_to_die);
-	printf("time now : %zu\n", get_time());
-	printf("id        status         last ate     last slept     n_ate      n_slept\n");
-	tmp = g_table.philos;
-	while (tmp->next)
-	{
-		printf("%5d %5d %15zu %15zu %10d %10d\n",tmp->content->id, tmp->content->status, tmp->content->last_ate, tmp->content->last_slept, tmp->content->n_ate, tmp->content->n_slept);
-		tmp = tmp->next;
-		if (tmp == g_table.philos)
-			break ;
-	}
-	pthread_mutex_unlock(&g_table.print);
-
 }
 
 void	destroy_table(int id, enum e_end status)
 {
-	
 	pthread_mutex_lock(&g_table.print);
 	if (status == E_DEAD)
-		printf("at : %zu philo %d died\n", get_time(), id);
-	else
-		printf("at : %zu all philos ate atleast %d times\n", get_time(), g_table.max_n_eat);
-	exit ((int)status);
+		printf("%zu %d died\n", get_time(), id);
+	exit (1);
 }
 
 
@@ -147,7 +122,6 @@ int	main(int ac, char **av)
 				break ;
 		}
 		if (i == g_table.count && g_table.max_n_eat > 0)
-			destroy_table(0, COMPLETED);
-
+			destroy_table(-1, COMPLETED);
 	}
 }
