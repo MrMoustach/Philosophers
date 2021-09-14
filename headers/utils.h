@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 17:48:07 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/04 15:06:10 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/14 16:42:41 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 # include "philo.h"
 # define MAXINT 2147483647
 # define MININT -2147483648
-int			ft_atol(const char *str);
-int			ft_is_number(char *s);
-int			ft_strlen(char *s);
-int			try_parse_int(char *str, int *err);
+int		ft_atol(const char *str);
+int		ft_is_number(char *s);
+int		ft_strlen(char *s);
+int		try_parse_int(char *str, int *err);
+size_t	get_time();
+void	n_sleep(size_t time);
+void	express(t_philo	philo, size_t time);
 #endif

@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 11:13:49 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/06 14:54:25 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:55:10 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ typedef struct s_philo
 		int				n_slept;
 		int				n_ate;
 		int				n_thought;
-		int				last_slept;
-		int				last_ate;
-		int				last_thought;
+		size_t			last_slept;
+		size_t			last_ate;
+		size_t			last_thought;
 		enum status		status;
 		pthread_t		tid;
 		pthread_mutex_t the_fork;
@@ -43,8 +43,6 @@ typedef struct s_table
 {
 		t_clist			*philos;
 		int				count;
-		int				iteration;
-		int				time_passed;
 		int				time_to_die;
 		int				time_to_eat;
 		int				time_to_sleep;
@@ -52,5 +50,6 @@ typedef struct s_table
 		pthread_mutex_t	*forks;
 		pthread_mutex_t print;
 		int				error;
+		size_t			started_at;
 }				t_table;
 #endif

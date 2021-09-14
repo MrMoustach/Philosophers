@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zed <zed@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:01:39 by zed               #+#    #+#             */
-/*   Updated: 2021/07/10 14:51:09 by zed              ###   ########.fr       */
+/*   Updated: 2021/09/14 16:42:52 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@
 # include "utils.h"
 
 t_table	add_philo(t_table table, int id);
-t_philo *ft_new_philo(int id, suseconds_t added);
-void *routine(void *content);
-
+t_philo	*ft_new_philo(int id, suseconds_t added);
+void	*routine(void *content);
+void	philo_think(t_philo *philo);
+void	philo_eat(t_philo *philo);
+void	philo_sleep(t_philo *philo);
+t_table	g_table;
 #endif

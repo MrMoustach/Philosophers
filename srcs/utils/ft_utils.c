@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 17:50:12 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/04 15:05:44 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/14 17:57:31 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ int try_parse_int(char *str, int *err)
 		(*err)--;
 		return (0);
 	}
+	if (ret < 0)
+		(*err)--;
 	return ((int) ret);
 }
