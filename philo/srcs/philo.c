@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 10:55:03 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/15 14:16:14 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/15 17:38:35 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	free_philos(void)
 	tmp = g_table.philos;
 	while (tmp->next)
 	{
-		pthread_mutex_destroy(&g_table.forks[tmp->content->id]);
+		pthread_mutex_destroy(&g_table.forks[tmp->content->id - 1]);
 		free (tmp->content);
 		tmp = tmp->next;
 		if (tmp == g_table.philos)

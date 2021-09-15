@@ -6,7 +6,7 @@
 #    By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/29 10:24:43 by iharchi           #+#    #+#              #
-#    Updated: 2021/09/15 14:25:38 by iharchi          ###   ########.fr        #
+#    Updated: 2021/09/15 17:37:40 by iharchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS		=	srcs/actions.c\
 FLAG		= -Wall -Werror -Wextra -lpthread
 
 OBJECTS		=	
-all:
+all: $(NAME)
+$(NAME):
 			@gcc main.c -g $(SRCS) -o $(NAME) 
 clean:
 			@/bin/rm -f $(OBJECT)
