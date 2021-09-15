@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 16:20:59 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/14 19:06:39 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:37:51 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	destroy_table(int id, enum e_end status)
 	pthread_mutex_lock(&g_table.print);
 	if (status == E_DEAD)
 		printf("%zu %d died\n", get_time(), id);
-	exit (1);
+	pthread_mutex_destroy(&g_table.print);
+	free_philos();
+	free (g_table.forks);
 }
 
 
@@ -74,36 +76,17 @@ t_table	init_table(int ac, char *av[])
 	table.started_at = 0;
 	if (table.error == 0)
 	{
-		pthread_mutex_init(&g_table.print, NULL);	
+		pthread_mutex_init(&table.print, NULL);	
 		table.forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * table.count);
 	}
 	return (table);
 }
 
-int	main(int ac, char **av)
+int	supervisor()
 {
-	int		i;
 	t_clist	*tmp;
+	int		i;
 
-	g_table = init_table(ac, av);
-	if (g_table.error)
-	{
-		write (2, "Error\n", 7);
-		return (1);
-	}
-	i = 0;
-	while (i < g_table.count)
-		g_table = add_philo(g_table, i++);
-	tmp = g_table.philos;
-	g_table.started_at = get_time();
-	while (tmp->next)
-	{
-		pthread_create(&(tmp->content->tid), NULL, &routine, tmp->content);
-		usleep(100);
-		tmp = tmp->next;
-		if (tmp == g_table.philos)
-			break ;
-	}
 	while (1)
 	{
 		tmp = g_table.philos;
@@ -116,12 +99,28 @@ int	main(int ac, char **av)
 			{	
 				tmp->content->status = DEAD;
 				destroy_table(tmp->content->id, E_DEAD);
+				return (1);
 			}
 			tmp = tmp->next;
 			if (tmp == g_table.philos)
 				break ;
 		}
 		if (i == g_table.count && g_table.max_n_eat > 0)
+		{	
 			destroy_table(-1, COMPLETED);
+			return (0);
+		}
 	}
+}
+
+int	main(int ac, char **av)
+{
+	g_table = init_table(ac, av);
+	if (g_table.error)
+	{
+		write (2, "Error\n", 7);
+		return (1);
+	}
+	start_simulation();
+	return (supervisor());
 }

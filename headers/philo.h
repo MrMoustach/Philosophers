@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:01:39 by zed               #+#    #+#             */
-/*   Updated: 2021/09/14 16:42:52 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:32:59 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ void	*routine(void *content);
 void	philo_think(t_philo *philo);
 void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
+void	start_simulation();
+void	free_philos();
 t_table	g_table;
 #endif

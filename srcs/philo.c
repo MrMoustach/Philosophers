@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 10:55:03 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/14 18:35:43 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/15 13:37:35 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_philo *ft_new_philo(int id, suseconds_t added)
 	ret->status = 0;
 	return (ret);
 }
-// TODO: change this
+
 t_table	add_philo(t_table table, int id)
 {
 	struct timeval	tv;
@@ -38,8 +38,42 @@ t_table	add_philo(t_table table, int id)
 	philo = ft_new_philo(id + 1, tv.tv_usec);
 	ft_add_clist(&table.philos, ft_new_clist(philo));
 	pthread_mutex_init(&table.forks[id], NULL);
-	// pthread_create(&(philo->tid), NULL, &routine, (void *)(philo));
 	return (table);
+}
+
+void	free_philos()
+{
+	t_clist	*tmp;
+	
+	tmp = g_table.philos;
+	while (tmp->next)
+	{
+		pthread_mutex_destroy(&g_table.forks[tmp->content->id]);
+		free (tmp->content);
+		tmp = tmp->next;
+		if (tmp == g_table.philos)
+			break ;
+	}
+}
+
+void	start_simulation()
+{
+	t_clist	*tmp;
+	int		i;
+	
+	i = 0;
+	while (i < g_table.count)
+		g_table = add_philo(g_table, i++);
+	g_table.started_at = get_time();
+	tmp = g_table.philos;
+	while (tmp->next)
+	{
+		pthread_create(&(tmp->content->tid), NULL, &routine, tmp->content);
+		usleep(100);
+		tmp = tmp->next;
+		if (tmp == g_table.philos)
+			break ;
+	}
 }
 
 void	philo_think(t_philo *philo)
