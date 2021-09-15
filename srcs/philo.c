@@ -6,16 +6,16 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 10:55:03 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/15 13:37:35 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/15 14:16:14 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/philo.h"
 
-t_philo *ft_new_philo(int id, suseconds_t added)
+t_philo	*ft_new_philo(int id, suseconds_t added)
 {
-	t_philo *ret;
-	
+	t_philo	*ret;
+
 	ret = (t_philo *)malloc(sizeof(t_philo));
 	ret->id = id;
 	ret->time_added = added;
@@ -41,10 +41,10 @@ t_table	add_philo(t_table table, int id)
 	return (table);
 }
 
-void	free_philos()
+void	free_philos(void)
 {
 	t_clist	*tmp;
-	
+
 	tmp = g_table.philos;
 	while (tmp->next)
 	{
@@ -56,11 +56,11 @@ void	free_philos()
 	}
 }
 
-void	start_simulation()
+void	start_simulation(void)
 {
 	t_clist	*tmp;
 	int		i;
-	
+
 	i = 0;
 	while (i < g_table.count)
 		g_table = add_philo(g_table, i++);
@@ -74,42 +74,4 @@ void	start_simulation()
 		if (tmp == g_table.philos)
 			break ;
 	}
-}
-
-void	philo_think(t_philo *philo)
-{
-	philo->status = THINKING;
-	express(*philo, get_time());
-	philo->last_thought = get_time();
-	philo->n_thought++;
-}
-
-void	philo_sleep(t_philo *philo)
-{
-	philo->status = SLEEPING;
-	express(*philo, get_time());
-	philo->last_slept = get_time();
-	n_sleep(g_table.time_to_sleep);
-	philo->n_slept++;
-}
-
-void	philo_eat(t_philo *philo)
-{
-	size_t	time;
-	int		fork_index;
-	
-	fork_index = philo->id % g_table.count;
-	pthread_mutex_lock(&g_table.forks[philo->id - 1]);
-	philo->status = FORK_1;
-	express(*philo, get_time());
-	pthread_mutex_lock(&g_table.forks[fork_index]);
-	philo->status = FORK_2;
-	express(*philo, get_time());
-	philo->status = EATING;
-	express(*philo, get_time());
-	philo->last_ate = get_time();
-	n_sleep(g_table.time_to_eat);
-	philo->n_ate++;
-	pthread_mutex_unlock(&g_table.forks[philo->id - 1]);
-	pthread_mutex_unlock(&g_table.forks[fork_index]);
 }

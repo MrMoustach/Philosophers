@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 16:00:36 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/14 19:02:18 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/15 14:17:06 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ size_t	get_time(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return ((((tv.tv_usec +  (tv.tv_sec * 1000000))) / 1000) - g_table.started_at );
+	return ((((tv.tv_usec + (tv.tv_sec * 1000000))) / 1000)
+		- g_table.started_at);
 }
 
 /** 

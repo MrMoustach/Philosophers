@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/28 10:49:18 by iharchi           #+#    #+#             */
-/*   Updated: 2021/07/07 09:20:46 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/15 14:19:33 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 t_clist	*ft_new_clist(t_philo *content)
 {
-	t_clist *ret;
-	
+	t_clist	*ret;
+
 	ret = (t_clist *)malloc(sizeof(t_clist));
 	ret->content = content;
 	ret->next = NULL;
@@ -24,7 +24,7 @@ t_clist	*ft_new_clist(t_philo *content)
 
 int	ft_add_clist(t_clist **list, t_clist *node)
 {
-	t_clist *tmp;
+	t_clist	*tmp;
 	int		i;
 
 	if (!list)
@@ -40,7 +40,7 @@ int	ft_add_clist(t_clist **list, t_clist *node)
 	i = 1;
 	while (tmp->next != *list && tmp->next != NULL)
 	{
-		i++;	
+		i++;
 		tmp = tmp->next;
 	}
 	tmp->next = node;

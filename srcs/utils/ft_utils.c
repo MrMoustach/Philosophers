@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 17:50:12 by iharchi           #+#    #+#             */
-/*   Updated: 2021/09/15 13:14:26 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/15 14:18:31 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ int	ft_is_number(char *s)
 
 int	ft_strlen(char *s)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
-	while (s[ret++])
-	;
+	while (s[ret])
+		ret++;
 	return (ret);
 }
 
-int try_parse_int(char *str, int *err)
+int	try_parse_int(char *str, int *err)
 {
 	long long	ret;
-	
+
 	if (!ft_is_number(str) || ft_strlen(str) > 13)
 	{
 		(*err)--;

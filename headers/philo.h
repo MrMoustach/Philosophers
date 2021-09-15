@@ -6,7 +6,7 @@
 /*   By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 17:01:39 by zed               #+#    #+#             */
-/*   Updated: 2021/09/15 13:32:59 by iharchi          ###   ########.fr       */
+/*   Updated: 2021/09/15 14:19:48 by iharchi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	*routine(void *content);
 void	philo_think(t_philo *philo);
 void	philo_eat(t_philo *philo);
 void	philo_sleep(t_philo *philo);
-void	start_simulation();
-void	free_philos();
+void	start_simulation(void);
+void	free_philos(void);
+int		destroy_table(int id, enum e_end status);
+t_table	init_table(int ac, char *av[]);
+int		supervisor(void);
 t_table	g_table;
 #endif
