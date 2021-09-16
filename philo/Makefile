@@ -6,7 +6,7 @@
 #    By: iharchi <iharchi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/29 10:24:43 by iharchi           #+#    #+#              #
-#    Updated: 2021/09/15 17:37:40 by iharchi          ###   ########.fr        #
+#    Updated: 2021/09/16 11:45:06 by iharchi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ FLAG		= -Wall -Werror -Wextra -lpthread
 OBJECTS		=	
 all: $(NAME)
 $(NAME):
-			@gcc main.c -g $(SRCS) -o $(NAME) 
+			@gcc main.c $(SRCS) -o $(NAME) 
 clean:
 			@/bin/rm -f $(OBJECT)
 
